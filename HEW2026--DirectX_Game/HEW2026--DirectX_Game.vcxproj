@@ -129,6 +129,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Game\Stages\Stage.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Framework\input.cpp" />
     <ClCompile Include="Framework\Object.cpp" />
@@ -146,6 +147,8 @@
     <ClInclude Include="Framework\stb_image.h" />
     <ClInclude Include="Framework\Texture.h" />
     <ClInclude Include="Game\Game.h" />
+    <ClInclude Include="Game\GameConfig.h" />
+    <ClInclude Include="Game\Stages\Stage.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="PixelShader.hlsl">

@@ -2,6 +2,7 @@
 #include "Object.h"
 #include "input.h"
 #include "sound.h"
+#include "Stages/Stage.h"
 
 class Game {
 private:
@@ -9,6 +10,7 @@ private:
 	Sound sound; //サウンド
 
 	Object m_player; //プレイヤーオブジェクト
+	Stage m_stage;   //ステージ
 
 public:
 	void Init(HWND hWnd); // 初期化
