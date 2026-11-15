@@ -1,62 +1,84 @@
 ﻿#include "Game.h"
+
 void Game::Init(HWND hWnd)
 {
 	RendererInit(hWnd); // DirectXを初期化
 
 	sound.Init();                   // サウンドを初期化
 	sound.Play(SOUND_LABEL_BGM000); // BGMを再生
-	m_stage.Init(); // ステージを初期化
 
+	m_time.Init();               // ゲーム内の時間を初期化
+	m_action.Init(hWnd, &input); // 操作を初期化
 
-	m_player.Init("asset/chara_test.png", 3, 4); // プレイヤーを初期化（横3分割、縦4分割）
-	m_player.SetPos(0.0f, 0.0f, 0.0f);      // 位置を設定
-	m_player.SetSize(96.0f, 96.0f, 0.0f);   // 大きさを設定
-	m_player.SetAngle(0.0f);                // 角度を設定
+	m_record = {};               // 記録を空にする(全部0)
+
+	ChangeScene(SCENE_TITLE);    // タイトルから始める
 }
 
 void Game::Update(void)
 {
-	input.Update(); // キー入力を更新
+	input.Update();    // キー入力を更新
+	m_time.Update();   // ゲーム内の時間を更新
+	m_action.Update(); // 操作を更新
 
-	// プレイヤーのアニメーション
-	m_player.numU++;
-	if (m_player.numU >= 3) {
-		m_player.numU = 0;
+	// 今のシーンを更新し、次のシーンを聞く
+	SCENE_ID next = SCENE_NONE;
+	switch (m_scene) {
+	case SCENE_TITLE:
+		m_titleScene.Update();
+		next = m_titleScene.GetNextScene();
+		break;
+	case SCENE_GAME:
+		m_gameScene.Update();
+		next = m_gameScene.GetNextScene();
+		break;
+	case SCENE_RESULT:
+		m_resultScene.Update();
+		next = m_resultScene.GetNextScene();
+		break;
 	}
 
-
-
-	// WASDでプレイヤーを移動
-	DirectX::XMFLOAT3 pos = m_player.GetPos();
-	if (input.GetKeyPress(VK_W)) { pos.y += 1.0f; }
-	if (input.GetKeyPress(VK_A)) { pos.x -= 1.0f; }
-	if (input.GetKeyPress(VK_S)) { pos.y -= 1.0f; }
-	if (input.GetKeyPress(VK_D)) { pos.x += 1.0f; }
-
-	// 重力
-	pos.y -= 1.5f;
-	m_player.SetPos(pos.x, pos.y, pos.z);
-
-	// スペースキーでSEを再生
-	if (input.GetKeyTrigger(VK_SPACE)) {
-		sound.Play(SOUND_LABEL_SE000);
+	// 次のシーンが決まったら切り替える
+	if (next != SCENE_NONE) {
+		ChangeScene(next);
 	}
 }
 
 void Game::Draw(void)
 {
 	RendererDrawStart(); // 描画開始
-	m_stage.Draw();		//ステージを描画
-	m_player.Draw();      //プレイヤーを描画
+
+	switch (m_scene) {
+	case SCENE_TITLE:	m_titleScene.Draw();	break;
+	case SCENE_GAME:	m_gameScene.Draw();		break;
+	case SCENE_RESULT:	m_resultScene.Draw();	break;
+	}
 
 	RendererDrawEnd();   // 描画終了
 }
 
 void Game::Uninit(void)
 {
-	m_player.Uninit(); // プレイヤーを終了
+	ChangeScene(SCENE_NONE); // 今のシーンを終了
 
 	sound.Uninit();    // サウンドを終了
-	m_stage.Uninit();  // ステージを終了
 	RendererUninit();  // DirectXを終了
+}
+
+void Game::ChangeScene(SCENE_ID next)
+{
+	// 今のシーンを終了する
+	switch (m_scene) {
+	case SCENE_TITLE:	m_titleScene.Uninit();	break;
+	case SCENE_GAME:	m_gameScene.Uninit();	break;
+	case SCENE_RESULT:	m_resultScene.Uninit();	break;
+	}
+
+	// 次のシーンを初期化する(画像の読み込みもここで行われる)
+	m_scene = next;
+	switch (m_scene) {
+	case SCENE_TITLE:	m_titleScene.Init(&m_action);						break;
+	case SCENE_GAME:	m_gameScene.Init(&m_action, &sound, &m_time, &m_record);	break;
+	case SCENE_RESULT:	m_resultScene.Init(&m_action, &m_record);				break;
+	}
 }

@@ -13,23 +13,11 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Framework">
-      <UniqueIdentifier>{2BB5E5B3-868D-48EB-A08C-9862BC83DC16}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game">
-      <UniqueIdentifier>{5A5FB6F6-12B5-4FAE-A42F-8B0B6655D638}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ヘッダー ファイル\Game">
       <UniqueIdentifier>{09add1ae-6793-4a5f-9b41-a38a37fae91d}</UniqueIdentifier>
     </Filter>
     <Filter Include="ヘッダー ファイル\Framework">
       <UniqueIdentifier>{73e387bf-8961-4d82-891a-308c83833118}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Scenes">
-      <UniqueIdentifier>{aefe498b-5774-4931-ad54-185bc0b5f712}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Stages">
-      <UniqueIdentifier>{f0ed7dba-1995-4290-83be-5c03432f88f1}</UniqueIdentifier>
     </Filter>
     <Filter Include="ヘッダー ファイル\Game\Stages">
       <UniqueIdentifier>{2dfc461d-fb79-4e9c-89f2-7d1b48adf2e1}</UniqueIdentifier>
@@ -37,34 +25,91 @@
     <Filter Include="ヘッダー ファイル\Game\Scenes">
       <UniqueIdentifier>{33cd16c3-0fbf-4873-b0ac-557a2547460f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ヘッダー ファイル\Core">
+      <UniqueIdentifier>{737ebcb7-5f87-4a04-b021-2c5a969be62a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Game">
+      <UniqueIdentifier>{5A5FB6F6-12B5-4FAE-A42F-8B0B6655D638}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Game\Scenes">
+      <UniqueIdentifier>{aefe498b-5774-4931-ad54-185bc0b5f712}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Game\Stages">
+      <UniqueIdentifier>{f0ed7dba-1995-4290-83be-5c03432f88f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Framework">
+      <UniqueIdentifier>{2BB5E5B3-868D-48EB-A08C-9862BC83DC16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Game\Actors">
+      <UniqueIdentifier>{88ec11ef-5633-4d0b-a80f-2d1b1f811dde}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Game\Actors">
+      <UniqueIdentifier>{70731e10-6ac3-4fca-8439-85386ba05764}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Core">
+      <UniqueIdentifier>{aeac278d-0cd3-44fc-b8c8-20d3b5ffb535}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Framework\input.cpp">
-      <Filter>Framework</Filter>
+      <Filter>ソース ファイル\Framework</Filter>
     </ClCompile>
     <ClCompile Include="Framework\Object.cpp">
-      <Filter>Framework</Filter>
+      <Filter>ソース ファイル\Framework</Filter>
     </ClCompile>
     <ClCompile Include="Framework\Renderer.cpp">
-      <Filter>Framework</Filter>
+      <Filter>ソース ファイル\Framework</Filter>
     </ClCompile>
     <ClCompile Include="Framework\sound.cpp">
-      <Filter>Framework</Filter>
+      <Filter>ソース ファイル\Framework</Filter>
     </ClCompile>
     <ClCompile Include="Framework\stb_image.cpp">
-      <Filter>Framework</Filter>
+      <Filter>ソース ファイル\Framework</Filter>
     </ClCompile>
     <ClCompile Include="Framework\Texture.cpp">
-      <Filter>Framework</Filter>
+      <Filter>ソース ファイル\Framework</Filter>
     </ClCompile>
     <ClCompile Include="Game\Game.cpp">
-      <Filter>Game</Filter>
+      <Filter>ソース ファイル\Game</Filter>
     </ClCompile>
     <ClCompile Include="Game\Stages\Stage.cpp">
-      <Filter>Game\Stages</Filter>
+      <Filter>ソース ファイル\Game\Stages</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Action.cpp">
+      <Filter>ソース ファイル\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\DrawUtil.cpp">
+      <Filter>ソース ファイル\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Collider.cpp">
+      <Filter>ソース ファイル\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Body.cpp">
+      <Filter>ソース ファイル\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Camera.cpp">
+      <Filter>ソース ファイル\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\WallList.cpp">
+      <Filter>ソース ファイル\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Scenes\TitleScene.cpp">
+      <Filter>ソース ファイル\Game\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Scenes\GameScene.cpp">
+      <Filter>ソース ファイル\Game\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Scenes\ResultScene.cpp">
+      <Filter>ソース ファイル\Game\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Actors\SampleFish.cpp">
+      <Filter>ソース ファイル\Game\Actors</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\GameTime.cpp">
+      <Filter>ソース ファイル\Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -89,11 +134,50 @@
     <ClInclude Include="Framework\Renderer.h">
       <Filter>ヘッダー ファイル\Framework</Filter>
     </ClInclude>
-    <ClInclude Include="Game\GameConfig.h">
-      <Filter>ヘッダー ファイル\Game</Filter>
-    </ClInclude>
     <ClInclude Include="Game\Stages\Stage.h">
       <Filter>ヘッダー ファイル\Game\Stages</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Config.h">
+      <Filter>ヘッダー ファイル\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Action.h">
+      <Filter>ヘッダー ファイル\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\DrawUtil.h">
+      <Filter>ヘッダー ファイル\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Collider.h">
+      <Filter>ヘッダー ファイル\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameRecord.h">
+      <Filter>ヘッダー ファイル\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Body.h">
+      <Filter>ヘッダー ファイル\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Camera.h">
+      <Filter>ヘッダー ファイル\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\WallList.h">
+      <Filter>ヘッダー ファイル\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Scenes\SceneID.h">
+      <Filter>ヘッダー ファイル\Game\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Scenes\TitleScene.h">
+      <Filter>ヘッダー ファイル\Game\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Scenes\GameScene.h">
+      <Filter>ヘッダー ファイル\Game\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Scenes\ResultScene.h">
+      <Filter>ヘッダー ファイル\Game\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Actors\SampleFish.h">
+      <Filter>ヘッダー ファイル\Game\Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\GameTime.h">
+      <Filter>ヘッダー ファイル\Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

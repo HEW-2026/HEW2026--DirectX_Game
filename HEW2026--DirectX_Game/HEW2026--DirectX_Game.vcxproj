@@ -76,7 +76,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)Framework;$(ProjectDir)Game;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Framework;$(ProjectDir)Game;$(ProjectDir)Game\Scenes;$(ProjectDir)Game\Stages;$(ProjectDir)Game\Actors;$(ProjectDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -91,7 +91,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)Framework;$(ProjectDir)Game;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Framework;$(ProjectDir)Game;$(ProjectDir)Game\Scenes;$(ProjectDir)Game\Stages;$(ProjectDir)Game\Actors;$(ProjectDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -105,7 +105,7 @@
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(ProjectDir)Framework;$(ProjectDir)Game;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Framework;$(ProjectDir)Game;$(ProjectDir)Game\Scenes;$(ProjectDir)Game\Stages;$(ProjectDir)Game\Actors;$(ProjectDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -121,7 +121,7 @@
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(ProjectDir)Framework;$(ProjectDir)Game;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Framework;$(ProjectDir)Game;$(ProjectDir)Game\Scenes;$(ProjectDir)Game\Stages;$(ProjectDir)Game\Actors;$(ProjectDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -129,6 +129,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Core\Action.cpp" />
+    <ClCompile Include="Core\Collider.cpp" />
+    <ClCompile Include="Core\DrawUtil.cpp" />
+    <ClCompile Include="Core\GameTime.cpp" />
     <ClCompile Include="Game\Stages\Stage.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Framework\input.cpp" />
@@ -138,8 +142,20 @@
     <ClCompile Include="Framework\stb_image.cpp" />
     <ClCompile Include="Framework\Texture.cpp" />
     <ClCompile Include="Game\Game.cpp" />
+    <ClCompile Include="Core\Body.cpp" />
+    <ClCompile Include="Core\Camera.cpp" />
+    <ClCompile Include="Core\WallList.cpp" />
+    <ClCompile Include="Game\Scenes\TitleScene.cpp" />
+    <ClCompile Include="Game\Scenes\GameScene.cpp" />
+    <ClCompile Include="Game\Scenes\ResultScene.cpp" />
+    <ClCompile Include="Game\Actors\SampleFish.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Core\Collider.h" />
+    <ClInclude Include="Core\Config.h" />
+    <ClInclude Include="Core\Action.h" />
+    <ClInclude Include="Core\DrawUtil.h" />
+    <ClInclude Include="Core\GameTime.h" />
     <ClInclude Include="Framework\input.h" />
     <ClInclude Include="Framework\Object.h" />
     <ClInclude Include="Framework\Renderer.h" />
@@ -147,8 +163,16 @@
     <ClInclude Include="Framework\stb_image.h" />
     <ClInclude Include="Framework\Texture.h" />
     <ClInclude Include="Game\Game.h" />
-    <ClInclude Include="Game\GameConfig.h" />
     <ClInclude Include="Game\Stages\Stage.h" />
+    <ClInclude Include="Game\GameRecord.h" />
+    <ClInclude Include="Core\Body.h" />
+    <ClInclude Include="Core\Camera.h" />
+    <ClInclude Include="Core\WallList.h" />
+    <ClInclude Include="Game\Scenes\SceneID.h" />
+    <ClInclude Include="Game\Scenes\TitleScene.h" />
+    <ClInclude Include="Game\Scenes\GameScene.h" />
+    <ClInclude Include="Game\Scenes\ResultScene.h" />
+    <ClInclude Include="Game\Actors\SampleFish.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="PixelShader.hlsl">
