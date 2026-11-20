@@ -8,7 +8,7 @@
 //
 // 1フレームの順番
 //   Update：タイマー → 魚(壁・岩に当たって滑る) → 当たり判定(CheckHit) → カメラ
-//   Draw  ：ステージ → 岩・敵 → 魚 → デバッグ表示
+//   Draw  ：描く順番は呼ぶ順ではなく DRAW_LAYER で決まる
 //
 // Init は2回目以降(もう一度遊ぶ時)も呼ばれるので、メンバーは全部 Init か ResetSample で決め直すこと。
 //
@@ -19,6 +19,7 @@
 #include "Camera.h"
 #include "DrawUtil.h"
 #include "Collider.h"
+#include "ColliderList.h"
 #include "WallList.h"
 #include "Stage.h"
 #include "SceneID.h"
@@ -55,6 +56,7 @@ private:
 	Collider m_enemy[SAMPLE_ENEMY_MAX];			// 敵の当たり判定
 	bool m_enemyAlive[SAMPLE_ENEMY_MAX] = {};	// 敵が生きているか
 	WallList m_rocks;							// 動かない岩(壁と同じで、通り抜けられない)
+	ColliderList m_colliders;					// 今フレームの当たり判定の名簿
 	float m_damageTime = 0.0f;	// 被弾した後、敵をすり抜ける残り時間(秒)
 
 	void ResetSample();	// 魚・敵・カメラ・時間を最初の状態に戻す

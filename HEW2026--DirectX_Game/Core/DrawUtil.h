@@ -4,17 +4,19 @@
 //==========================================================//
 //
 // 位置と大きさはワールド座標(ドット)。Init で渡した Camera を通して描く。
-// デバッグ用(Init の2つ目が true)：F1キーで表示/非表示が切り替わる。Config.h の DEBUG_DRAW が0なら何も描かない
-// 演出用  (Init の2つ目が false)：いつも描く(水流線・破片など)
+// デバッグ用(Init の2つ目が true)：F1キーで表示/非表示が切り替わる。Config.h の DEBUG_DRAW が0なら何も描かない。DRAW_LAYER_DEBUG に描く
+// 演出用  (Init の2つ目が false)：いつも描く(水流線・破片など)。DRAW_LAYER_EFFECT_FRONT に描く
 //
 // 使い方
 //   m_draw.Init(&m_camera);         // デバッグ用
 //   m_effectDraw.Init(&m_camera, false); // 演出用
 //   m_draw.DrawCircle(pos.x, pos.y, radius, { 0.0f, 1.0f, 0.0f, 0.4f }); // 半透明の緑の円
 //   m_draw.DrawCollider(collider, { 1.0f, 0.0f, 0.0f, 0.4f });          // 当たり判定をそのまま描く
+//   m_effectDraw.SetLayer(DRAW_LAYER_EFFECT_BACK);                      // 魚の後ろに描く
 //
 #include "Object.h"
 #include "Collider.h"
+#include "TagLayer.h"
 
 // Camera の前方宣言(ポインタだけ使うので、中身は .cpp で include する)
 class Camera;
@@ -27,6 +29,7 @@ public:
 
 	void SwitchShow();	// 表示/非表示を切り替える(F1キーで呼ぶ)
 	bool IsShow();		// 描くか
+	void SetLayer(DRAW_LAYER layer);	// 描画レイヤーを変える(Init の後に呼ぶ)
 
 	//	円を描く(x, y:中心、radius:半径)
 	void DrawCircle(float x, float y, float radius, DirectX::XMFLOAT4 color);
@@ -45,4 +48,5 @@ private:
 	Camera* m_pCamera = nullptr;	// 描く時に使うカメラ
 	bool m_isDebug = true;			// デバッグ用か(デバッグ用だけ F1 で消せる)
 	bool m_isShow = true;			// デバッグ表示を表示中か
+	DRAW_LAYER m_layer = DRAW_LAYER_DEBUG;	// 描画レイヤー
 };

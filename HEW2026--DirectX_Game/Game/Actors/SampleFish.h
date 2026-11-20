@@ -25,7 +25,7 @@ public:
 
 	void Reset(float x, float y);	// 位置と状態を最初に戻す
 
-	Collider GetCollider();		// 当たり判定
+	Collider GetCollider();		// 当たり判定(TAG_PLAYER、HIT_LAYER_PLAYER)
 	DirectX::XMFLOAT2 GetPos();	// 位置
 	float GetAngle();			// 頭の向き(度)
 	float GetSpeed();			// 今の速さ(ドット/秒。ドリフト中の減速は含まない)

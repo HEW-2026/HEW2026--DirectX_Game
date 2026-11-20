@@ -1,4 +1,5 @@
 ﻿#include "Game.h"
+#include "DrawList.h"
 
 void Game::Init(HWND hWnd)
 {
@@ -53,6 +54,8 @@ void Game::Draw(void)
 	case SCENE_GAME:	m_gameScene.Draw();		break;
 	case SCENE_RESULT:	m_resultScene.Draw();	break;
 	}
+
+	g_drawList.DrawAll(); // 予約した物を描画レイヤーの順に描く
 
 	RendererDrawEnd();   // 描画終了
 }

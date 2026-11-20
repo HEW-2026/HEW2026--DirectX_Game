@@ -145,6 +145,9 @@
     <ClCompile Include="Core\Body.cpp" />
     <ClCompile Include="Core\Camera.cpp" />
     <ClCompile Include="Core\WallList.cpp" />
+    <ClCompile Include="Core\TagLayer.cpp" />
+    <ClCompile Include="Core\ColliderList.cpp" />
+    <ClCompile Include="Core\DrawList.cpp" />
     <ClCompile Include="Game\Scenes\TitleScene.cpp" />
     <ClCompile Include="Game\Scenes\GameScene.cpp" />
     <ClCompile Include="Game\Scenes\ResultScene.cpp" />
@@ -168,6 +171,9 @@
     <ClInclude Include="Core\Body.h" />
     <ClInclude Include="Core\Camera.h" />
     <ClInclude Include="Core\WallList.h" />
+    <ClInclude Include="Core\TagLayer.h" />
+    <ClInclude Include="Core\ColliderList.h" />
+    <ClInclude Include="Core\DrawList.h" />
     <ClInclude Include="Game\Scenes\SceneID.h" />
     <ClInclude Include="Game\Scenes\TitleScene.h" />
     <ClInclude Include="Game\Scenes\GameScene.h" />

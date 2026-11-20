@@ -61,6 +61,8 @@ void GameScene::ResetSample()
 		m_enemy[i].SetEllipse(ENEMY_RADIUS_X, ENEMY_RADIUS_Y);
 		m_enemy[i].SetPos(enemyPos[i].x, enemyPos[i].y);
 		m_enemy[i].SetAngle(0.0f);
+		m_enemy[i].SetTag(TAG_ENEMY);
+		m_enemy[i].SetHitLayer(HIT_LAYER_ENEMY);
 		m_enemyAlive[i] = true;
 	}
 
@@ -117,14 +119,27 @@ void GameScene::Update()
 
 void GameScene::CheckHit()
 {
-	Collider fish = m_fish.GetCollider();
+	// 今フレームの当たり判定の名簿を作る(全員が動いた後。倒した敵は入れない)
+	m_colliders.Clear();
+	m_colliders.Add(m_fish.GetCollider(), 0);
 	for (int i = 0; i < SAMPLE_ENEMY_MAX; i++) {
-		if (!m_enemyAlive[i]) continue;
-		if (!IsHit(fish, m_enemy[i])) continue;
+		if (m_enemyAlive[i]) m_colliders.Add(m_enemy[i], i);
+	}
 
-		// 回転中か、正面から当たったら倒す
-		if (m_fish.IsSpinning() || IsFront(m_fish.GetPos(), m_fish.GetAngle(), m_enemy[i])) {
-			m_enemyAlive[i] = false;
+	// 魚と敵を名簿から探す
+	int fishIndex = m_colliders.FindWithTag(TAG_PLAYER);
+	if (fishIndex < 0) return;	// 魚が名簿に無い時は調べない
+	Collider fish = m_colliders.GetItem(fishIndex).collider;
+	int enemyList[COLLIDER_LIST_MAX];
+	int enemyCount = m_colliders.FindAllWithTag(TAG_ENEMY, enemyList);
+
+	for (int i = 0; i < enemyCount; i++) {
+		ColliderItem enemy = m_colliders.GetItem(enemyList[i]);
+		if (!IsHit(fish, enemy.collider)) continue;
+
+		// 回転中か、正面から当たったら倒す(enemy.ownerIndex が m_enemy の何番目か)
+		if (m_fish.IsSpinning() || IsFront(m_fish.GetPos(), m_fish.GetAngle(), enemy.collider)) {
+			m_enemyAlive[enemy.ownerIndex] = false;
 			m_pTime->StartHitstop(HITSTOP_KILL);
 			m_camera.Shake(SHAKE_KILL, SHAKE_TIME);
 			m_pSound->Play(SOUND_LABEL_SE000);
@@ -161,12 +176,12 @@ void GameScene::Draw()
 	// 【サンプル】岩・敵・魚
 	for (int i = 0; i < m_rocks.GetCircleCount(); i++) {
 		WallCircle rock = m_rocks.GetCircle(i);
-		m_camera.Draw(&m_rockImage, rock.center.x, rock.center.y, rock.radius * 2.0f, rock.radius * 2.0f);
+		m_camera.Draw(&m_rockImage, rock.center.x, rock.center.y, rock.radius * 2.0f, rock.radius * 2.0f, DRAW_LAYER_CHARACTER);
 	}
 	for (int i = 0; i < SAMPLE_ENEMY_MAX; i++) {
 		if (!m_enemyAlive[i]) continue;
 		DirectX::XMFLOAT2 pos = m_enemy[i].GetPos();
-		m_camera.Draw(&m_enemyImage, pos.x, pos.y, ENEMY_RADIUS_X * 2.0f, ENEMY_RADIUS_X * 2.0f);
+		m_camera.Draw(&m_enemyImage, pos.x, pos.y, ENEMY_RADIUS_X * 2.0f, ENEMY_RADIUS_X * 2.0f, DRAW_LAYER_CHARACTER);
 	}
 	m_fish.Draw(&m_camera);
 

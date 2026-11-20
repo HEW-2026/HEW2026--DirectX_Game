@@ -1,5 +1,6 @@
 ﻿#include "Camera.h"
 #include "Config.h"
+#include "DrawList.h"
 #include <math.h>
 #include <stdlib.h> // rand
 
@@ -105,14 +106,20 @@ float Camera::WorldToScreenLength(float length)
 	return length * GetScreenScale();
 }
 
-void Camera::Draw(Object* pObject, float x, float y, float width, float height)
+void Camera::Draw(Object* pObject, float x, float y, float width, float height, DRAW_LAYER layer)
 {
+	// 画面に映らない物は予約しない(回しても収まるように、対角線の半分で調べる)
+	float radius = sqrtf(width * width + height * height) / 2.0f;
+	if (!IsInView(x, y, radius)) {
+		return;
+	}
+
 	// 左下と右上の角をピクセルに丸めてから大きさを決める(引いた時のタイルのすき間防止)
 	DirectX::XMFLOAT2 leftBottom = WorldToScreen({ x - width / 2.0f, y - height / 2.0f });
 	DirectX::XMFLOAT2 rightTop = WorldToScreen({ x + width / 2.0f, y + height / 2.0f });
 	pObject->SetPos((leftBottom.x + rightTop.x) / 2.0f, (leftBottom.y + rightTop.y) / 2.0f, 0.0f);
 	pObject->SetSize(rightTop.x - leftBottom.x, rightTop.y - leftBottom.y, 0.0f);
-	pObject->Draw();
+	g_drawList.Add(pObject, layer);
 }
 
 float Camera::GetViewLeft()
@@ -168,4 +175,15 @@ void Camera::KeepInBounds()
 		if (m_pos.y < m_boundBottom + halfH) m_pos.y = m_boundBottom + halfH;
 		if (m_pos.y > m_boundTop - halfH) m_pos.y = m_boundTop - halfH;
 	}
+}
+
+bool Camera::IsInView(float x, float y, float radius)
+{
+	// 揺れでずれる分も含めて調べる
+	float margin = radius + m_shakePower;
+	if (x + margin < GetViewLeft()) return false;
+	if (x - margin > GetViewRight()) return false;
+	if (y + margin < GetViewBottom()) return false;
+	if (y - margin > GetViewTop()) return false;
+	return true;
 }

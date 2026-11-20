@@ -111,7 +111,7 @@ void SampleFish::Draw(Camera* pCamera)
 	}
 	m_image.SetAngle(m_angle);
 	DirectX::XMFLOAT2 pos = m_body.GetPos();
-	pCamera->Draw(&m_image, pos.x, pos.y, FISH_SIZE, FISH_SIZE);
+	pCamera->Draw(&m_image, pos.x, pos.y, FISH_SIZE, FISH_SIZE, DRAW_LAYER_PLAYER);
 }
 
 void SampleFish::DrawDebug(DrawUtil* pDraw, DirectX::XMFLOAT4 color)
@@ -132,7 +132,11 @@ void SampleFish::Uninit()
 
 Collider SampleFish::GetCollider()
 {
-	return m_body.GetCollider();
+	// Body の円に、魚のタグとレイヤーを付けて返す
+	Collider collider = m_body.GetCollider();
+	collider.SetTag(TAG_PLAYER);
+	collider.SetHitLayer(HIT_LAYER_PLAYER);
+	return collider;
 }
 
 DirectX::XMFLOAT2 SampleFish::GetPos()

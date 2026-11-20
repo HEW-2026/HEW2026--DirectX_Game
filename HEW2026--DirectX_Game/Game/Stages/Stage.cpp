@@ -63,7 +63,7 @@ void Stage::Draw(Camera* pCamera)
 			// マスの中心の座標(ワールド座標)
 			float centerX = x * TILE_SIZE + TILE_SIZE / 2.0f;
 			float centerY = (m_height - 1 - y) * TILE_SIZE + TILE_SIZE / 2.0f;
-			pCamera->Draw(&m_tile, centerX, centerY, TILE_SIZE, TILE_SIZE);
+			pCamera->Draw(&m_tile, centerX, centerY, TILE_SIZE, TILE_SIZE, DRAW_LAYER_STAGE);
 		}
 	}
 }

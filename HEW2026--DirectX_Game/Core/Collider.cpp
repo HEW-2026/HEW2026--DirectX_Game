@@ -18,12 +18,17 @@ void Collider::SetEllipse(float radiusX, float radiusY)
 
 void Collider::SetPos(float x, float y) { m_pos = { x,y }; }
 void Collider::SetAngle(float angle) { m_angle = angle; }
+void Collider::SetTag(TAG tag) { m_tag = tag; }
+void Collider::SetHitLayer(HIT_LAYER layer) { m_hitLayer = layer; }
 
 COLLIDER_TYPE Collider::GetType() { return m_type; }
 DirectX::XMFLOAT2 Collider::GetPos() { return m_pos; }
 float Collider::GetRadiusX() { return m_radiusX; }
 float Collider::GetRadiusY() { return m_radiusY; }
 float Collider::GetAngle() { return m_angle; }
+TAG Collider::GetTag() { return m_tag; }
+bool Collider::CompareTag(TAG tag) { return m_tag == tag; }
+HIT_LAYER Collider::GetHitLayer() { return m_hitLayer; }
 
 DirectX::XMFLOAT2 Collider::GetEdgePoint(DirectX::XMFLOAT2 point)
 {
@@ -69,6 +74,11 @@ static bool HitCircleEllipse(Collider circle, Collider ellipse)
 
 bool IsHit(Collider a, Collider b)
 {
+	//	当たらないレイヤーの組み合わせなら調べない
+	if (!IsLayerHit(a.GetHitLayer(), b.GetHitLayer())) {
+		return false;
+	}
+
 	if (a.GetType() == COLLIDER_CIRCLE && b.GetType() == COLLIDER_CIRCLE) {
 		return HitCircleCircle(a, b);
 	}
